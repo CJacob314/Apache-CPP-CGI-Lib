@@ -1,11 +1,11 @@
 # HTTP CGI Lib
-This is not a very useful library. It was mostly made as a personal project to familiarize myself more with Makefiles and Linux library/header file directories.
+This project was mostly made as a personal side-project to familiarize myself more with how Makefiles interact with Linux library/header file directories.
 
-The idea is to compile C++ scripts with a command like the following (and configure Apache2.4 accordingly) to have Apache serve your content through a compiled script (as opposed to interpreting PHP).
+The idea is to compile C++ scripts with a command like the following (and configure your CGI-compliant server-hosting program accordingly) to have it serve your content through a compiled script (as opposed to, say,  interpreting PHP).
 
 `g++ -O3 -o /path/to/live/server/dir/script.cgi src-file1.cpp src-file2.cpp -lcjacobcgi -static`
 
-If you really want easy-to-use speed, probably look to something like [HHVM](https://hhvm.com/).
+If you want easier-to-use speed, probably look to something like [HHVM](https://hhvm.com/).
 
 ## Installation
 Clone the git repo, then, in the cloned directory, run `make` followed by `sudo make install`.
@@ -19,8 +19,8 @@ Clone the git repo, then, in the cloned directory, run `make` followed by `sudo 
 using namespace CJacob314::HTTP;
 
 int main(void) {
-    std::string ipAddr = getenv("REMOTE_ADDR");
-    std::string userAgent = getenv("HTTP_USER_AGENT");
+    std::string ipAddr = $("REMOTE_ADDR");
+    std::string userAgent = $("HTTP_USER_AGENT");
     std::string title = "<head><title>IP and User-Agent Info</title></head>";
 
     send_page(200, HTML, title + "<body><h1>IP and User-Agent Info</h1><p>Your IP address is: " + ipAddr + "</p><p>Your User-Agent is: " + userAgent + "</p></body>");
